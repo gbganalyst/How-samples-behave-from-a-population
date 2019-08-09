@@ -30,9 +30,12 @@ ggplot(dat, aes(x = x, y = y)) + geom_line() + theme_bw() +
 
 # This function generate random sampling and plot its distribution 
 
-sampling <- function(n = 155){
-  if (n < 0 ){
-    print('Pease enter a positive number')
+sampling <- function(n) {
+  n = as.integer(readline(cat('How many sample size do you want to generate?\nn=')))
+  if (is.na(n) == TRUE) {
+    cat('Pease enter a positive number greater than 2 \n and rerun the sampling() function again')
+  }else if (n %in% c(0, 1, 2)) {
+    cat('Pease enter a positive number greater than 2 \n and rerun the sampling() function again')
   }else {
     sample = tibble(sample = rnorm(n, mean = 150, sd = 40))
     print(sample)
@@ -40,29 +43,18 @@ sampling <- function(n = 155){
     cat('The mean of the sample is:', mean(sample$sample),'\n')
     cat('The standard deviation of the sample is:', sd(sample$sample))
     return(sample %>% ggplot(aes(x = sample, y = ..density..))+ 
-     geom_histogram(fill = 'blue', color= 'black', 
-    breaks = pretty(range(sample$sample), n = nclass.Sturges(sample$sample),min.n = 1)) + geom_density() + theme_bw()+
-        labs(y = 'Probability density', x = 'Sample', title = paste0('Distribution of ', n, ' samples'), subtitle = 'from a normal distribution with mean = 150, sd = 40'))
+             geom_histogram(fill = 'blue', color= 'black', 
+                            breaks = pretty(range(sample$sample), n = nclass.Sturges(sample$sample),min.n = 1)) + geom_density() + theme_bw()+
+             labs(y = 'Probability density', x = 'Sample', title = paste0('Distribution of ', n, ' samples'), subtitle = 'from a normal distribution with mean = 150, sd = 40'))
   }
   
-  }
-  
-# Take a sample size (n) to see how sample behave from the population
-
-sampling(n = 30)
-
-# keep on changing sample size (n) to see how sample behave from the population
-
-sampling(n = 52)
+}
 
 
-sampling(n= 180)
 
-sampling(n= 300)
+# keep on running sampling() function below and vary the value of sample size n 
+# to see how sample behave from the population
+# Please respond to the console.
 
+sampling()
 
-sampling(n= 500)
-
-sampling(250)
-
-sampling(52000)
