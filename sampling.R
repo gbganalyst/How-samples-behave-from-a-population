@@ -33,9 +33,9 @@ ggplot(dat, aes(x = x, y = y)) + geom_line() + theme_bw() +
 sampling <- function(n) {
   n = as.integer(readline(cat('How many sample size do you want to generate?\nn=')))
   if (is.na(n) == TRUE) {
-    cat('Pease enter a positive number greater than 2 \n and rerun the sampling() function again')
-  }else if (n %in% c(0, 1, 2)) {
-    cat('Pease enter a positive number greater than 2 \n and rerun the sampling() function again')
+    cat('Pease enter a positive number greater than 5 \n and rerun the sampling() function again')
+  }else if (n < 5) {
+    cat('Pease enter a positive number greater than 5 \n and rerun the sampling() function again')
   }else {
     sample = tibble(sample = rnorm(n, mean = 150, sd = 40))
     print(sample)
