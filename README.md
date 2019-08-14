@@ -1,7 +1,6 @@
-# Sampling from a normally distributed population
+# How samples behave from a normally distributed population
 
-This tidyverse `R` script shows that drawing samples from a normally distributed population do not necessarily mean the samples will follow a normal distribution.
-
+This tidyverse `R` script shows that drawing samples from a normally distributed population do not necessarily mean the samples will behave (look) like a normal distribution.
 
 To follow along with this `R` script, first, you will need to watch the
 following videos created by Mike Marin to get the sampling concept.
