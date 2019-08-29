@@ -11,7 +11,7 @@ if (!require("install.load")) {
 install.load::install_load(c("ggplot2", "tibble", "magrittr"))
 
 
-# Generating population data in which we shall take the sample from
+# Generating population data in which we shall draw the sample from
 
 dat <- tibble(x = 20:290, y = dnorm(20:290, mean = 150, sd = 40))
 
@@ -31,36 +31,43 @@ ggplot(dat, aes(x = x, y = y)) + geom_line() + theme_bw() +
 # This function generate random sampling, plot its distribution and test for its normality
 
 sampling <- function(n) {
-  n = as.integer(readline(cat('How many sample size do you want to generate?\nn=')))
+  n <- as.integer(readline(cat("How many sample size do you want to generate?
+n=")))
   if (is.na(n) == TRUE) {
-    cat('Pease enter a positive number greater than 5 \n and rerun the sampling() function again')
-  }else if (n < 5) {
-    cat('Pease enter a positive number greater than 5 \n and rerun the sampling() function again')
-  }else {
-    sample_df = tibble(sample = rnorm(n, mean = 150, sd = 40))
+  warning("You only press the return key without entering an integer n.\nPlease rerun the sampling() function again and enter a positive number greater than 5")
+  } else if (n < 5) {
+    warning("You enter a number less than 5.\nPlease rerun the sampling() function again and enter a positive number greater than 5")
+  } else {
+    sample_df <- tibble(sample = rnorm(n, mean = 150, sd = 40))
     print(sample_df)
-    cat('The sample size is:', n, '\n')
-    cat('The mean of the sample is:', mean(sample_df$sample),'\n')
-    cat('The standard deviation of the sample is:', sd(sample_df$sample), '\n')
-    print(sample_df %>% ggplot(aes(x = sample, y = ..density..))+ 
-             geom_histogram(fill = 'blue', color= 'black', 
-                            breaks = pretty(range(sample_df$sample), 
-                                            n = nclass.Sturges(sample_df$sample), min.n = 1)) + 
-            geom_density() + theme_bw()+
-             labs(y = 'Probability density', 
-                  x = 'Sample', title = paste0('Distribution of ', n, ' samples'), 
-                  subtitle = 'from a normal distribution with mean = 150, sd = 40'))
+    cat("The sample size is:", n, "\n")
+    cat("The mean of the sample is:", mean(sample_df$sample), "\n")
+    cat("The standard deviation of the sample is:", sd(sample_df$sample), "\n")
+    print(sample_df %>% ggplot(aes(x = sample, y = ..density..)) +
+      geom_histogram(
+        fill = "blue", color = "black",
+        breaks = pretty(range(sample_df$sample),
+          n = nclass.Sturges(sample_df$sample), min.n = 1
+        )
+      ) +
+      geom_density() + theme_bw() +
+      labs(
+        y = "Probability density",
+        x = "Sample", title = paste0("Distribution of ", n, "samples"),
+        subtitle = "from a normal distribution with mean = 150, sd = 40"
+      ))
     print(shapiro.test(sample_df$sample))
     if (shapiro.test(sample_df$sample)$p.value > 0.05) cat("The sample is normally distributed") else cat("The sample is not normally distributed")
   }
-  
 }
 
 
 sampling()
 
 
-# Please respond to the console
+
+
+# Please respond to the console by pressing ctrl+2
 
 
 
@@ -69,5 +76,6 @@ sampling()
 
 sampling()
 
-# Please respond to the console
+# Please respond to the console by pressing ctrl+2
+
 
