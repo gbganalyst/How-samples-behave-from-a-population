@@ -1,4 +1,4 @@
-# How samples behave from a normally distributed population
+# How samples drawn from a normally distributed population behave
 
 This tidyverse `R` script shows that drawing samples from a normally distributed population do not necessarily mean the samples will behave (look) like a normal distribution.
 
